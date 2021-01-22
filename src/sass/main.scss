@@ -1,0 +1,14 @@
+// Declare Variables
+$tablet: "only screen and (min-width : 768px)";
+$desktop: "only screen and (min-width : 1025px)";
+$xlarge: "only screen and (min-width : 1441px)";
+
+// Base Theme
+html {
+  --colorPrimary: #5677a8;
+}
+
+@import 'normalize';
+@import 'global';
+
+// Components

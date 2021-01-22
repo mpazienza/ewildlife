@@ -1,0 +1,26 @@
+===============
+Todo
+===============
+- Ensure that query is correct
+- Add alias display
+
+===============
+Nice to have
+===============
+- Add export
+- CPC results page
+- Fix for second level category if no first level selected
+- split scss by components
+
+===============
+Issues
+===============
+
+
+
+
+
+
+
+
+- switch back to:autm-ip-marketplace.rexsite

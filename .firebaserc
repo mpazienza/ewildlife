@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ewildlife-50aa1"
+  },
+  "targets": {
+    "ewildlife": {
+      "hosting": {
+        "app": [
+          "ewildlife"
+        ]
+      }
+    }
+  }
+}
