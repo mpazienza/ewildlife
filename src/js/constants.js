@@ -4,6 +4,8 @@ export const AWAITING_RESPONSE = 'AWAITING_RESPONSE';
 export const ERROR_LOGIN = 'ERROR_LOGIN';
 export const ANONYMOUS = 'ANONYMOUS';
 export const AUTHENTICATED = 'AUTHJENTICATED';
+export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+export const SENT_PASSWORD = 'SENT_PASSWORD';
 
 // USER
 export const LOGIN_USER = 'LOGIN_USER';

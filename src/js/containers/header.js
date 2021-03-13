@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink, Link, withRouter } from 'react-router-dom';
+import { AUTHENTICATED } from '../constants';
 
 // Components
 import { Container, Menu } from 'semantic-ui-react';
@@ -12,15 +13,16 @@ class Header extends Component {
   }
 
   render() {
+    const { isAuthenticated } = this.props;
     return (
       <header id="head" role="header">
         <Menu className="fixed inverted">
           <Container>
-            <Menu.Item header>eWildlife</Menu.Item>
-            <Menu.Item name="Intake" as={ NavLink } to="/intake" />
-            <Menu.Item name="Reports" as={ NavLink } to="/reports" />
+            <Menu.Item header as={ Link } to="/">eWildlife</Menu.Item>
+            { isAuthenticated && <Menu.Item name="Intake" as={ NavLink } to="/intake" /> }
+            { isAuthenticated && <Menu.Item name="Reports" as={ NavLink } to="/reports" /> }
             <Menu.Menu position='right'>
-              <Menu.Item name="Settings" as={ Link } to="/settings" />
+              { isAuthenticated && <Menu.Item name="Settings" as={ Link } to="/settings" /> }
             </Menu.Menu>
           </Container>
         </Menu>
@@ -33,6 +35,7 @@ Header.defaultProps = {
 };
 
 Header.propTypes = {
+  isAuthenticated: PropTypes.bool
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -42,6 +45,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return Object.assign({}, {
+    isAuthenticated: ( AUTHENTICATED === state.auth.status )
   });
 };
 

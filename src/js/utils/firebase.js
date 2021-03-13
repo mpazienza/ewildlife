@@ -6,4 +6,7 @@ import config from '../env';
 
 firebase.initializeApp( config );
 
+// Export the Firestore DB
+export const db = firebase.firestore();
+
 export default firebase;
