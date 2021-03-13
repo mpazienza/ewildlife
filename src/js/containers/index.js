@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Components
-import Sidebar from './sidebar';
-import Logobar from './logobar';
-import Navbar from './navbar';
-import Persona from './persona';
-import Content from './content';
-import Explore from './explore';
-import Modal from './modal';
+import { Container } from 'semantic-ui-react';
+import Header from './header';
 
 class AppContainer extends Component {
   constructor(props) {
@@ -16,37 +12,25 @@ class AppContainer extends Component {
   }
 
   render() {
-    let { children, theme, isEmbed } = this.props;
-    let { sidebar } = this.props.visibility;
-    let logobar = true;
-    let navbar = false;
-
-    if (isEmbed) {
-      logobar = false;
-      navbar = true;
-      sidebar = false;
-    }
+    let { children } = this.props;
 
     return (
-      <div id="app" className={`theme-${theme}`} ref="app">
-        { sidebar && <Sidebar /> }
-        <main id="main" role="content">
-          { logobar && <Logobar /> }
-          { navbar && <Navbar /> }
-          <Persona />
-          <Content>
-            { children }
-          </Content>
-          <Explore />
-        </main>
-        <Modal />
+      <div id="app">
+        <Header/>
+        <Container as="main" id="main" role="content">
+          { children }
+        </Container>
       </div>
     );
   }
-};
+}
 
 AppContainer.defaultProps = {
   children: []
+};
+
+AppContainer.propTypes = {
+  children: PropTypes.node
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -56,8 +40,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return Object.assign({}, {
-    isEmbed: state.config.isEmbed,
-    visibility: state.config.visibility
   });
 };
 

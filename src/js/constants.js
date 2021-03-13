@@ -1,0 +1,11 @@
+// AUTH
+export const ATTEMPTING_LOGIN = 'ATTEMPTING_LOGIN';
+export const AWAITING_RESPONSE = 'AWAITING_RESPONSE';
+export const ERROR_LOGIN = 'ERROR_LOGIN';
+export const ANONYMOUS = 'ANONYMOUS';
+export const AUTHENTICATED = 'AUTHJENTICATED';
+
+// USER
+export const LOGIN_USER = 'LOGIN_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const UPDATE_USER = 'UPDATE_USER';

@@ -4,109 +4,53 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { getParameter } from './utils/getParameter';
-import cssVars from 'css-vars-ponyfill';
+import { checkAuth } from './actions/auth';
 
+// Reducers
 import rootReducer from './reducers';
-import { startListeningToAuth, manualAuth } from './actions/auth';
-import { loadSiteConfig } from './actions/config';
 
-import requireAuth from "./components/auth";
-import IndexView from './views/index';
-import LoginView from './views/login';
-import LogoutView from './views/logout';
-import AccountView from './views/account';
-import SavedView from './views/saved';
-import WorkflowView from './views/workflow';
-import ResultsView from './views/results';
-import LoadView from './views/load';
+// Container
+import AppContainer from './containers/index';
 
-// Polyfill
-cssVars();
+// Views
+import HomeView from './views/home';
+import SignInView from './views/sign-in';
+import SignOutView from './views/sign-out';
+import SignUpView from './views/sign-up';
+import IntakeView from './views/intake';
+import ReportView from './views/report';
 
-// Prevent Select All, Copy, and Cut
-document.addEventListener("contextmenu", () => {
-  return false;
-} );
+import AdminView from './views/admin';
 
-document.addEventListener( "keydown", (evt) => {
-  if (evt.ctrlKey || evt.metaKey) {
-    if (evt.keyCode === 65 || evt.keyCode === 67 || evt.keyCode === 88) {
-      evt.preventDefault();
-      return false;
-    }
-  } 
-} );
+import NotFoundView from './views/sign-out';
+
 
 // Create the data store
 const store = createStore(rootReducer, applyMiddleware(thunk));
-const user = getParameter('user'); // Is a user passed?
-const embed = getParameter('embed') == 'true'; // Treat as an embed
 
-// Get the current domain
-const host = window.location.hostname;
-let   site = getParameter('site') || 'rex'; // Make REX the default site
-
-// Set the site based on the current domain
-if (host.match(/skylightip\.com/g)) {
-  site = host.split('.')[0];
-}
-
-if (host.match(/ipscio\.com/g)) {
-  site = 'simple-semantic-search';
-}
-
-store.dispatch( loadSiteConfig(site, embed) );
-
-
-var unsubscribe = store.subscribe( () => {
-  var s = store.getState();
-
-  // Make sure config is loaded before enabling user
-  if (s.siteName !== '') {
-    unsubscribe();
-
-    store.dispatch( startListeningToAuth() );
-
-    if (user && s.config.allowUserParam) {
-      var referrers = s.config.restrictReferrers.split(',') || []
-
-      // If the params is restricted to domains, then lets verify
-      if (referrers && referrers.length) {
-        var docRef = document.referrer;
-        var valid = false;
-
-        for (var i = 0; i < referrers.length; i++) {
-          if (docRef.includes(referrers[i].trim())) {
-            valid = true;
-            store.dispatch( manualAuth(user) );
-            break;
-          }
-        }
-
- 
-      } else {
-        store.dispatch( manualAuth(user) );
-      }
-
-    }
-  }
-})
-
+// Check for Authentication
+store.dispatch( checkAuth() );
 
 // Start up the application
 render(
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
-        <Route exact path='/' component={requireAuth(IndexView)} />
-        <Route exact path='/login' component={LoginView} />
-        <Route exact path='/logout' component={requireAuth(LogoutView)} />
-        <Route exact path='/account' component={requireAuth(AccountView)} />
-        <Route exact path='/saved' component={requireAuth(SavedView)} />
-        <Route exact path='/:workflow' component={requireAuth(WorkflowView)} />
-        <Route exact path='/:workflow/results' component={requireAuth(ResultsView)} />
-        <Route exact path='/:workflow/load' component={requireAuth(LoadView)} />
+        <Route render={({ location }) => (
+          <AppContainer>
+            <Switch location={ location }>
+              <Route exact path='/' component={ HomeView } />
+              <Route exact path='/sign-in' component={ SignInView } />
+              <Route exact path='/sign-out' component={ SignOutView } />
+              <Route exact path='/sign-up' component={ SignUpView } />
+              <Route exact path='/intake' component={ IntakeView } />
+              <Route exact path='/report' component={ ReportView } />
+              <Route exact path='/admin' component={ AdminView } />
+
+              <Route component={ NotFoundView } />
+            </Switch>
+          </AppContainer>
+        ) } />
       </Switch>
     </BrowserRouter>
   </Provider>,

@@ -15,7 +15,8 @@ module.exports = () => {
   return {
     context: path.join(__dirname, 'src'),
     entry: {
-      main: ['@babel/polyfill', './js/index.js', './sass/main.scss']
+      main: ['@babel/polyfill', './js/index.js','./sass/main.scss'],
+      vendor: ['semantic-ui-css/semantic.min.css']
     },
     externals: {
       "createjs": "createjs"
@@ -46,7 +47,6 @@ module.exports = () => {
         },
       },
     },
-    devtool: '',
     performance: {
       hints: false,
       maxEntrypointSize: 244000,
@@ -61,19 +61,25 @@ module.exports = () => {
           use: ['babel-loader', 'eslint-loader']
         },
         {
-          test: /\.s?[ac]ss$/,
+          test: /\.s[ac]ss$/,
           use: [
             MiniCssExtractPlugin.loader,
             'css-loader',
             'postcss-loader',
             'sass-loader',
-          ],
+          ]
         },
         {
           test: /\.css$/,
           use: [
+            MiniCssExtractPlugin.loader,
             'css-loader',
             'postcss-loader',
+            'resolve-url-loader'
+          ],
+          include: [
+            path.join(__dirname, 'src'),
+            /node_modules/
           ],
         },
         {
@@ -85,16 +91,23 @@ module.exports = () => {
               useRelativePath: true
             }
           }]
+        },
+        {
+          test: [/\.eot$/, /\.ttf$/, /\.svg$/, /\.woff$/, /\.woff2$/],
+          loader: require.resolve('file-loader'),
+          options: {
+              name: 'static/media/[name].[hash:8].[ext]',
+          },
         }
       ]
     },
     plugins: [
       new CleanWebpackPlugin(),
-      new CopyWebpackPlugin(
-        [
+      new CopyWebpackPlugin({
+        patterns: [
           { from: '../public', to: '../build/public' }
         ]
-      ),
+      }),
       new MiniCssExtractPlugin({
         filename: 'css/[name].css'
       }),
