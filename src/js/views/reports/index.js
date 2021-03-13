@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button } from 'semantic-ui-react';
 
 // Components
+import { Header } from 'semantic-ui-react';
 
 // Create the view
-class AdminView extends Component {
+class ReportView extends Component {
   constructor(props) {
     super(props);
   }
@@ -14,16 +14,16 @@ class AdminView extends Component {
   render() {
     return (
       <div className="view view-home">
-        <p>Admin Page</p>
+        <Header as="h1">Reports</Header>
       </div>
     );
   }
 }
 
-AdminView.defaultProps = {
+ReportView.defaultProps = {
 };
 
-AdminView.propTypes = {
+ReportView.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -36,9 +36,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const AdminViewConnect = connect(
+const ReportViewConnect = connect(
   mapStateToProps, 
   mapDispatchToProps
-)(AdminView);
+)(ReportView);
 
-export default AdminViewConnect;
+export default ReportViewConnect;

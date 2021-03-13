@@ -18,11 +18,14 @@ import SignInView from './views/sign-in';
 import SignOutView from './views/sign-out';
 import SignUpView from './views/sign-up';
 import IntakeView from './views/intake';
-import ReportView from './views/report';
+import ReportsView from './views/reports';
 
-import AdminView from './views/admin';
+import SettingsView from './views/settings';
 
 import NotFoundView from './views/sign-out';
+
+// Components
+import RequireAuth from './components/auth';
 
 
 // Create the data store
@@ -43,9 +46,9 @@ render(
               <Route exact path='/sign-in' component={ SignInView } />
               <Route exact path='/sign-out' component={ SignOutView } />
               <Route exact path='/sign-up' component={ SignUpView } />
-              <Route exact path='/intake' component={ IntakeView } />
-              <Route exact path='/report' component={ ReportView } />
-              <Route exact path='/admin' component={ AdminView } />
+              <Route exact path='/intake' component={ RequireAuth( IntakeView ) } />
+              <Route exact path='/reports' component={ RequireAuth( ReportsView ) } />
+              <Route exact path='/settings' component={ RequireAuth( SettingsView ) } />
 
               <Route component={ NotFoundView } />
             </Switch>

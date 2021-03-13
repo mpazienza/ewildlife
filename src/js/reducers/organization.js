@@ -1,28 +1,17 @@
-// const initialState = {
-//   uid: null,   // The Organization ID
-//   name: null,  // The Organization Name
-//   members: [], // Organization Members
-//   taxonomy: {} // Animal Taxonomy
-// };
+import { LOAD_ORGANIZATION } from '../constants';
 
-// DELETE
 const initialState = {
-  uid: 'yfCEj9xPQ2N6dVnpxTSK',
-  name: 'All Things Wild',
-  taxonomy: {
-    1: {
-      name: 'Bird',
-      species: {
-        1: {
-          name: 'Mocking Bird'
-        }
-      }
-    }
-  }
+  uid: null,   // The Organization ID
+  name: null,  // The Organization Name
+  isOwner: false,
+  members: [], // Organization Members
+  taxonomy: {} // Animal Taxonomy
 };
 
 const organization = (state = initialState, action) => {
   switch (action.type) {
+    case LOAD_ORGANIZATION:
+      return Object.assign( {}, state, action.value );
     default:
       return state;
   }

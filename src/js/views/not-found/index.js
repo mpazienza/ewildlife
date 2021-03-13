@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Components
+import { Container, Header } from 'semantic-ui-react';
 
 // Create the view
 class NotFoundView extends Component {
@@ -12,8 +13,8 @@ class NotFoundView extends Component {
 
   render() {
     return (
-      <div className="view view-sign-in">
-        <p>404 Page</p>
+      <div className="view view-not-found">
+        <Header as="h1">404 Not Found</Header>
       </div>
     );
   }

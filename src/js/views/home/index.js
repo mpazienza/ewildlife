@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button } from 'semantic-ui-react';
+import { AUTHENTICATED } from '../../constants';
 
 // Components
 
@@ -24,6 +24,7 @@ HomeView.defaultProps = {
 };
 
 HomeView.propTypes = {
+  isAuthenticated: PropTypes.bool
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -33,6 +34,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
+    isAuthenticated: ( AUTHENTICATED === state.auth.status )
   };
 };
 

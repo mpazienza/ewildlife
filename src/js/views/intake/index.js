@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { AUTHENTICATED } from '../../constants';
 
 // Components
+import { Header } from 'semantic-ui-react';
 import IntakeList from '../../components/intake/list';
 
 // Create the view
@@ -14,7 +16,7 @@ class IntakeView extends Component {
   render() {
     return (
       <div className="view view-intake">
-        <h1>Intake</h1>
+        <Header as="h1">Intake</Header>
         <IntakeList/>
       </div>
     );
