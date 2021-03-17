@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { AUTHENTICATED } from '../../constants';
 
 // Components
-import { Container, Header } from 'semantic-ui-react';
+import { Segment, Header } from 'semantic-ui-react';
 import SignInForm from '../../components/signin/form';
 
 // Create the view
@@ -37,9 +37,9 @@ class SignInView extends Component {
       <div className="view view-sign-in">
         <Header as="h1">Sign In</Header>
 
-        <Container>
+        <Segment className="segment-form">
           <SignInForm/>
-        </Container>
+        </Segment>
       </div>
     );
   }

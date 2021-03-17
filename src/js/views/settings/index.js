@@ -13,8 +13,7 @@ class SettingsView extends Component {
 
   render() {
     const { user, organization } = this.props;
-
-    console.log( this.props );
+    let memberType = ( organization.isOwner ) ? 'owner' : 'member';
 
     return (
       <div className="view view-settings">
@@ -37,10 +36,8 @@ class SettingsView extends Component {
               <Input id="last_name" value={ user.last_name }/>
             </Form.Field>
           </Form>
-        </Segment>
 
-        <Segment>
-          <Header as="h2">Organization</Header>
+          <p>Is <strong>{ memberType }</strong> of { organization.name } organization</p>
         </Segment>
       </div>
     );

@@ -52,7 +52,6 @@ class SignInForm extends Component {
     return(
       <Form onSubmit={ this.handleEmailLogin }>
         { error && <div className="error-text"><p>Hmm... We didn&apos;t recognize that Email/Password.</p></div>}
-        <Form.Group widths={2}>
           <Form.Field>
             <label>Email</label>
             <Input type='email' ref={ this.emailRef } />
@@ -61,8 +60,7 @@ class SignInForm extends Component {
             <label>Password</label>
             <Input type='password' ref={ this.passwordRef } />
           </Form.Field>
-        </Form.Group>
-        <Button type='submit'>Submit</Button>
+        <Button type='submit' fluid primary >Submit</Button>
       </Form>
     );
   }

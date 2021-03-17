@@ -8,5 +8,8 @@ $xlarge: "only screen and (min-width : 1441px)";
 
 @import 'global';
 
+// Views
+@import 'views/sign-in';
+
 // Components
 @import 'components/intake-table';
