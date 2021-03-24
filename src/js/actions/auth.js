@@ -1,5 +1,6 @@
 import firebase, { db } from '../utils/firebase';
-import { ATTEMPTING_LOGIN, AWAITING_RESPONSE, FORGOT_PASSWORD, PASSWORD_SENT, ERROR_LOGIN, LOGIN_USER, LOGOUT_USER, LOAD_ORGANIZATION } from '../constants';
+import { loadUser } from './user';
+import { ATTEMPTING_LOGIN, AWAITING_RESPONSE, FORGOT_PASSWORD, PASSWORD_SENT, ERROR_LOGIN, UPDATE_USER, LOGOUT_USER, LOAD_ORGANIZATION, LOGIN_USER } from '../constants';
 
 export const checkAuth = () => {
   return ( dispatch ) => {
@@ -61,34 +62,11 @@ export const forgotPassword = ( email ) => {
 
 export const loginUser = (user) => {
   return ( dispatch ) => {
-    // Fetch the Meta Data from Firebase
-    var userRef = db.collection( 'users' ).doc( `${ user.uid}` );
+    // Load the User
+    dispatch( loadUser( user ) );
 
-    userRef.onSnapshot( snapshot => {
-      var userMetaData = snapshot.data();
-
-      dispatch( {
-        type: LOGIN_USER,
-        value: {
-          uid: user.uid,
-          email: user.email,
-          first_name: userMetaData.first_name,
-          last_name: userMetaData.last_name
-        }
-      } );
-
-      var orgRef = userMetaData.organization;
-      orgRef.onSnapshot( snapshot => {
-        var orgMetaData = snapshot.data();
-
-        dispatch( {
-          type: LOAD_ORGANIZATION,
-          value: {
-            name: orgMetaData.name,
-            isOwner: ( user.uid === orgMetaData.owner )
-          }
-        } );
-      } ) ;
+    dispatch( {
+      type: LOGIN_USER
     } );
   };
 };

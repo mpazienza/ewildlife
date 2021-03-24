@@ -5,7 +5,7 @@ import { NavLink, Link, withRouter } from 'react-router-dom';
 import { AUTHENTICATED } from '../constants';
 
 // Components
-import { Container, Menu } from 'semantic-ui-react';
+import { Container, Menu, Dropdown } from 'semantic-ui-react';
 
 class Header extends Component {
   constructor(props) {
@@ -22,7 +22,14 @@ class Header extends Component {
             { isAuthenticated && <Menu.Item name="Intake" as={ NavLink } to="/intake" /> }
             { isAuthenticated && <Menu.Item name="Reports" as={ NavLink } to="/reports" /> }
             <Menu.Menu position='right'>
-              { isAuthenticated && <Menu.Item name="Settings" as={ Link } to="/settings" /> }
+
+              { isAuthenticated && <Dropdown className="item simple" text="Settings">
+                <Dropdown.Menu>
+                  <Dropdown.Item as={ NavLink } to="/settings" text="Profile"></Dropdown.Item>
+                  <Dropdown.Item as={ NavLink } to="/organization" text="Organization"></Dropdown.Item>
+                  <Dropdown.Item as={ Link } to="/log-out" text="Log out"></Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown> }
             </Menu.Menu>
           </Container>
         </Menu>

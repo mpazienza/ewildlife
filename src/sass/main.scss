@@ -13,3 +13,6 @@ $xlarge: "only screen and (min-width : 1441px)";
 
 // Components
 @import 'components/intake-table';
+
+// Other
+@import '../../node_modules/react-notifications-component/dist/theme.css';

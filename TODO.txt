@@ -1,16 +1,13 @@
 ===============
 Todo
 ===============
-- Ensure that query is correct
-- Add alias display
+- Add a home page
+- Add users to organization settings
+- Add animal categories
 
 ===============
 Nice to have
 ===============
-- Add export
-- CPC results page
-- Fix for second level category if no first level selected
-- split scss by components
 
 ===============
 Issues

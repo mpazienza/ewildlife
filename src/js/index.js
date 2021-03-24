@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import ReactNotification from 'react-notifications-component';
 import { checkAuth } from './actions/auth';
 
 // Reducers
@@ -21,6 +22,7 @@ import IntakeView from './views/intake';
 import ReportsView from './views/reports';
 
 import SettingsView from './views/settings';
+import OrganizationView from './views/organization';
 
 import NotFoundView from './views/sign-out';
 
@@ -38,6 +40,7 @@ store.dispatch( checkAuth() );
 render(
   <Provider store={store}>
     <BrowserRouter>
+      <ReactNotification />
       <Switch>
         <Route render={({ location }) => (
           <AppContainer>
@@ -49,6 +52,7 @@ render(
               <Route exact path='/intake' component={ RequireAuth( IntakeView ) } />
               <Route exact path='/reports' component={ RequireAuth( ReportsView ) } />
               <Route exact path='/settings' component={ RequireAuth( SettingsView ) } />
+              <Route exact path='/organization' component={ RequireAuth( OrganizationView ) } />
 
               <Route component={ NotFoundView } />
             </Switch>

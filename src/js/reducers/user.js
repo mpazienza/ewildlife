@@ -14,7 +14,6 @@ const user = (state = initialState, action) => {
     case UPDATE_USER:
       return Object.assign( {}, state, action.value );
     case LOGIN_USER:
-      console.log( action );
       return Object.assign( {}, state, action.value );
     case LOGOUT_USER:
       return Object.assign( {}, initialState );
