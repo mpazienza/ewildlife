@@ -27,6 +27,7 @@ export const loadOrganization = ( uid ) => {
         value: {
           uid: uid,
           name: orgMetaData.name,
+          owner: orgMetaData.owner,
           isOwner: ( state.user.uid === orgMetaData.owner ),
           taxonomy: orgMetaData.taxonomy.id
         }
@@ -96,10 +97,7 @@ export const getOrganizationMembers = ( uid ) => {
     var uid = uid || state.organization.uid;
 
     var orgRef = db.collection('organizations').doc( uid );
-    var orgMetaData = orgRef.get().then();
-
-    console.log(orgMetaData);
-
+    
     // Find all of the users with the organization attached
     db.collection('users').where( 'organization', '==', orgRef ).get().then( docs => {
       var members = docs.map( user => { 
@@ -109,7 +107,7 @@ export const getOrganizationMembers = ( uid ) => {
           uid: user.id,
           first_name: metaData.first_name,
           last_name: metaData.last_name,
-          isOwner: ( orgMetaData.owner === user.id )
+          isOwner: ( state.organization.owner === user.id )
         };
        } );
 

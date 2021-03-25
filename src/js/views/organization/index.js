@@ -5,6 +5,7 @@ import { updateOrganizationMetaData } from '../../actions/organization';
 
 // Components
 import { Header, Segment, Form, Input, Button } from 'semantic-ui-react';
+import {} from '';
 
 // Create the view
 class OrganizationView extends Component {
