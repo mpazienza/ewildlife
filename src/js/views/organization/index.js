@@ -34,13 +34,21 @@ class OrganizationView extends Component {
         <Header as="h1">Organization</Header>
 
         <Segment>
-        <Form>
+          <Form>
             <Form.Field>
               <label>Name</label>
               <Input id="email" type="email" ref={ this.nameRef } defaultValue={ organization.name }/>
             </Form.Field>
             <Button type='submit' primary onClick={ this.save }>Save</Button>
           </Form>
+        </Segment>
+
+        <Segment>
+          <Header as="h2">Animal Classification</Header>
+        </Segment>
+
+        <Segment>
+          <Header as="h2">Members</Header>
         </Segment>
       </div>
     );

@@ -1,9 +1,15 @@
 import { db } from '../utils/firebase';
 import { store } from 'react-notifications-component';
-import { LOAD_ORGANIZATION } from '../constants';
+import { loadTaxonomy } from './taxonomy';
+import { UPDATE_ORGANIZATION } from '../constants';
 
 var orgRef;
 
+/**
+ * loadOrganization - Loads the data listener for the organization
+ * @param {string} uid 
+ * @returns 
+ */
 export const loadOrganization = ( uid ) => {
   return ( dispatch, getState ) => {
     var state = getState();
@@ -17,17 +23,31 @@ export const loadOrganization = ( uid ) => {
       var orgMetaData = snapshot.data();
 
       dispatch( {
-        type: LOAD_ORGANIZATION,
+        type: UPDATE_ORGANIZATION,
         value: {
           uid: uid,
           name: orgMetaData.name,
-          isOwner: ( state.user.uid === orgMetaData.owner )
+          isOwner: ( state.user.uid === orgMetaData.owner ),
+          taxonomy: orgMetaData.taxonomy.id
         }
       } );
+
+      // If the taxonomy is different then load the new taxonomy
+      if ( !orgMetaData.taxonomy.uid !== state.taxonomy.uid ) {
+        dispatch( loadTaxonomy( orgMetaData.taxonomy.id ) );
+      }
+
+      // Load the members
+      dispatch( getOrganizationMembers() );
     } );
   };
 };
 
+/**
+ * updateOrganizationMetaData - update the non-id data for the organization
+ * @param {string} name 
+ * @returns 
+ */
 export const updateOrganizationMetaData = ( name ) => {
   return ( dispatch, getState ) => {
     var state = getState();
@@ -62,6 +82,43 @@ export const updateOrganizationMetaData = ( name ) => {
           duration: 2000
         }
       });
+    } );
+  };
+};
+
+/**
+ * getOrganizationMembers - loads the users that are associated with the organization
+ * @param {string} uid (optional, default loads the current loaded org) 
+ */
+export const getOrganizationMembers = ( uid ) => {
+  return ( dispatch, getState ) => {
+    var state = getState();
+    var uid = uid || state.organization.uid;
+
+    var orgRef = db.collection('organizations').doc( uid );
+    var orgMetaData = orgRef.get().then();
+
+    console.log(orgMetaData);
+
+    // Find all of the users with the organization attached
+    db.collection('users').where( 'organization', '==', orgRef ).get().then( docs => {
+      var members = docs.map( user => { 
+        var metaData = user.data();
+
+        return {
+          uid: user.id,
+          first_name: metaData.first_name,
+          last_name: metaData.last_name,
+          isOwner: ( orgMetaData.owner === user.id )
+        };
+       } );
+
+       dispatch( {
+         type: UPDATE_ORGANIZATION,
+         value: {
+           members
+         }
+       } );
     } );
   };
 };
