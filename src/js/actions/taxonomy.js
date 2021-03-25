@@ -27,9 +27,7 @@ export const loadTaxonomy = ( uid ) => {
 
           familyPromises.push( new Promise( ( fresolve, freject ) => {
             var speciesRef = familyRef.doc(`${fDoc.id}`).collection('species');
-            var speciesPromises = [];
-
-            speciesPromises.push( new Promise( ( sresolve, sreject ) => {
+            var speciesPromises = new Promise( ( sresolve, sreject ) => {
               // Fetch all of the species for a family and convert to an object
               speciesRef.get().then( sData => {
                 sresolve( sData.docs.map( sDoc => {
@@ -40,9 +38,7 @@ export const loadTaxonomy = ( uid ) => {
               } ).catch( () => {
                 sreject();
               } );
-            } ) );
-
-            Promise.all( speciesPromises ).then( species => {
+            } ).then( species => {
               fresolve( Object.assign( {}, fDoc.data(), {
                 uid: fDoc.id,
                 species
@@ -56,11 +52,12 @@ export const loadTaxonomy = ( uid ) => {
         } );
 
         Promise.all( familyPromises ).then( families => {
+          console.log(families);
           dispatch( {
             type: UPDATE_TAXONOMY,
             value: {
               uid: snapshot.id,
-              families
+              families: families
             }
           } );
         } );

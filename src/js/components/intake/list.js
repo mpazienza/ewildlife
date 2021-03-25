@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Moment from 'moment';
 
 // Components
@@ -14,12 +15,27 @@ class IntakeList extends Component {
   }
 
   _renderItem( intake ) {
-    console.log( intake );
+    const { families } = this.props;
+    var family = {};
+    var species = {};
+
+    if ( families.length ) {
+      family = families.find( fData => {
+        return fData.uid === intake.family;
+      } );
+
+      if ( family.species.length ) {
+        species = family.species.find( sData => {
+          return sData.uid === intake.species;
+        } );
+      }
+    }
+
     return(
       <Table.Row key={ `intake-row-${ intake.uid }`}>
         <Table.Cell className="table-intake-date">{ Moment.unix( intake.date.seconds ).format('MM/DD/YYYY') }</Table.Cell>
-        <Table.Cell className="table-intake-type">Bird</Table.Cell>
-        <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
+        <Table.Cell className="table-intake-type">{ family && family.name }</Table.Cell>
+        <Table.Cell className="table-intake-species">{ species && species.name }</Table.Cell>
         <Table.Cell className="table-intake-quantity" textAlign='center'>{ intake.quantity }</Table.Cell>
         <Table.Cell className="table-intake-actions"textAlign='center'>edit delete</Table.Cell>
       </Table.Row>
@@ -28,9 +44,9 @@ class IntakeList extends Component {
 
   _renderItems() {
     var items = [];
-    const { intakes } = this.props;
+    const { intakes, families } = this.props;
 
-    if ( intakes.length ) {
+    if ( intakes.length && families.length ) {
       intakes.forEach( intake => {
         items.push( this._renderItem( intake ) );
       } );
@@ -66,7 +82,24 @@ IntakeList.defaultProps = {
 };
 
 IntakeList.propTypes = {
-  intakes: PropTypes.array
+  intakes: PropTypes.array,
+  families: PropTypes.array
 };
 
-export default IntakeList;
+const mapDispatchToProps = (dispatch) => {
+  return {
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    families: state.taxonomy.families
+  };
+};
+
+const IntakeListConnect = connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(IntakeList);
+
+export default IntakeListConnect;
