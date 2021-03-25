@@ -14,10 +14,13 @@ class IntakeView extends Component {
   }
 
   render() {
+    const { intakes } = this.props;
+
     return (
       <div className="view view-intake">
         <Header as="h1">Intake</Header>
-        <IntakeList/>
+
+        <IntakeList intakes={ intakes } />
       </div>
     );
   }
@@ -27,6 +30,7 @@ IntakeView.defaultProps = {
 };
 
 IntakeView.propTypes = {
+  intakes: PropTypes.array
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -36,6 +40,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
+    intakes: state.intakes.list
   };
 };
 

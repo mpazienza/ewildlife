@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import Moment from 'moment';
 
 // Components
 import { Table } from 'semantic-ui-react';
@@ -13,13 +13,14 @@ class IntakeList extends Component {
     super(props);
   }
 
-  _renderItem() {
+  _renderItem( intake ) {
+    console.log( intake );
     return(
-      <Table.Row>
-        <Table.Cell className="table-intake-date">Jan 1, 2021</Table.Cell>
+      <Table.Row key={ `intake-row-${ intake.uid }`}>
+        <Table.Cell className="table-intake-date">{ Moment.unix( intake.date.seconds ).format('MM/DD/YYYY') }</Table.Cell>
         <Table.Cell className="table-intake-type">Bird</Table.Cell>
         <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
-        <Table.Cell className="table-intake-quantity" textAlign='center'>1</Table.Cell>
+        <Table.Cell className="table-intake-quantity" textAlign='center'>{ intake.quantity }</Table.Cell>
         <Table.Cell className="table-intake-actions"textAlign='center'>edit delete</Table.Cell>
       </Table.Row>
     );
@@ -27,6 +28,13 @@ class IntakeList extends Component {
 
   _renderItems() {
     var items = [];
+    const { intakes } = this.props;
+
+    if ( intakes.length ) {
+      intakes.forEach( intake => {
+        items.push( this._renderItem( intake ) );
+      } );
+    }
 
     return items;
   }
@@ -46,76 +54,7 @@ class IntakeList extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          <Table.Row>
-            <Table.Cell className="table-intake-date">Jan 1, 2021</Table.Cell>
-            <Table.Cell className="table-intake-type">Bird</Table.Cell>
-            <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
-            <Table.Cell className="table-intake-quantity" textAlign='center'>1</Table.Cell>
-            <Table.Cell className="table-intake-actions"textAlign='center'>edit delete</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className="table-intake-date">Jan 1, 2021</Table.Cell>
-            <Table.Cell className="table-intake-type">Bird</Table.Cell>
-            <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
-            <Table.Cell className="table-intake-quantity">1</Table.Cell>
-            <Table.Cell className="table-intake-actions">edit delete</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className="table-intake-date">Jan 1, 2021</Table.Cell>
-            <Table.Cell className="table-intake-type">Bird</Table.Cell>
-            <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
-            <Table.Cell className="table-intake-quantity">1</Table.Cell>
-            <Table.Cell className="table-intake-actions">edit delete</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className="table-intake-date">Jan 1, 2021</Table.Cell>
-            <Table.Cell className="table-intake-type">Bird</Table.Cell>
-            <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
-            <Table.Cell className="table-intake-quantity">1</Table.Cell>
-            <Table.Cell className="table-intake-actions">edit delete</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className="table-intake-date">Jan 1, 2021</Table.Cell>
-            <Table.Cell className="table-intake-type">Bird</Table.Cell>
-            <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
-            <Table.Cell className="table-intake-quantity">1</Table.Cell>
-            <Table.Cell className="table-intake-actions">edit delete</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className="table-intake-date">Jan 1, 2021</Table.Cell>
-            <Table.Cell className="table-intake-type">Bird</Table.Cell>
-            <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
-            <Table.Cell className="table-intake-quantity">1</Table.Cell>
-            <Table.Cell className="table-intake-actions">edit delete</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className="table-intake-date">Jan 1, 2021</Table.Cell>
-            <Table.Cell className="table-intake-type">Bird</Table.Cell>
-            <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
-            <Table.Cell className="table-intake-quantity">1</Table.Cell>
-            <Table.Cell className="table-intake-actions">edit delete</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className="table-intake-date">Jan 1, 2021</Table.Cell>
-            <Table.Cell className="table-intake-type">Bird</Table.Cell>
-            <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
-            <Table.Cell className="table-intake-quantity">1</Table.Cell>
-            <Table.Cell className="table-intake-actions">edit delete</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className="table-intake-date">Jan 1, 2021</Table.Cell>
-            <Table.Cell className="table-intake-type">Bird</Table.Cell>
-            <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
-            <Table.Cell className="table-intake-quantity">1</Table.Cell>
-            <Table.Cell className="table-intake-actions">edit delete</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className="table-intake-date">Jan 1, 2021</Table.Cell>
-            <Table.Cell className="table-intake-type">Bird</Table.Cell>
-            <Table.Cell className="table-intake-species">Mockingbird</Table.Cell>
-            <Table.Cell className="table-intake-quantity">1</Table.Cell>
-            <Table.Cell className="table-intake-actions">edit delete</Table.Cell>
-          </Table.Row>
+          { items }
         </Table.Body>
       </Table>
     );
@@ -123,30 +62,11 @@ class IntakeList extends Component {
 }
 
 IntakeList.defaultProps = {
-  items: [
-    {
-      date: 'Jan 1, 2021',
-      type: 'bird'
-    }
-  ]
+  intakes: []
 };
 
 IntakeList.propTypes = {
+  intakes: PropTypes.array
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-  };
-};
-
-const IntakeListConnect = connect(
-  mapStateToProps, 
-  mapDispatchToProps
-)(IntakeList);
-
-export default IntakeListConnect;
+export default IntakeList;

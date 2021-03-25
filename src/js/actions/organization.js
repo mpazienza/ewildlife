@@ -1,6 +1,7 @@
 import { db } from '../utils/firebase';
 import { store } from 'react-notifications-component';
 import { loadTaxonomy } from './taxonomy';
+import { loadIntakes } from './intake';
 import { UPDATE_ORGANIZATION } from '../constants';
 
 var orgRef;
@@ -19,7 +20,7 @@ export const loadOrganization = ( uid ) => {
       orgRef();
     }
 
-    orgRef = db.collection( 'organizations' ).doc( `${ uid}` ).onSnapshot( snapshot => {
+    orgRef = db.collection( 'organizations' ).doc( `${uid}` ).onSnapshot( snapshot => {
       var orgMetaData = snapshot.data();
 
       dispatch( {
@@ -40,6 +41,9 @@ export const loadOrganization = ( uid ) => {
 
       // Load the members
       dispatch( getOrganizationMembers() );
+
+      // Load the intakes
+      dispatch( loadIntakes() );
     } );
   };
 };
@@ -99,8 +103,8 @@ export const getOrganizationMembers = ( uid ) => {
     var orgRef = db.collection('organizations').doc( uid );
     
     // Find all of the users with the organization attached
-    db.collection('users').where( 'organization', '==', orgRef ).get().then( docs => {
-      var members = docs.map( user => { 
+    db.collection('users').where( 'organization', '==', orgRef ).get().then( res => {
+      var members = res.docs.map( user => { 
         var metaData = user.data();
 
         return {
