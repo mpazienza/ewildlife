@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Moment from 'moment';
+import dayjs from 'dayjs';
 
 // Components
 import { Table } from 'semantic-ui-react';
@@ -33,7 +33,7 @@ class IntakeList extends Component {
 
     return(
       <Table.Row key={ `intake-row-${ intake.uid }`}>
-        <Table.Cell className="table-intake-date">{ Moment.unix( intake.date.seconds ).format('MM/DD/YYYY') }</Table.Cell>
+        <Table.Cell className="table-intake-date">{ dayjs.unix( intake.date.seconds ).format('MM/DD/YYYY') }</Table.Cell>
         <Table.Cell className="table-intake-type">{ family && family.name }</Table.Cell>
         <Table.Cell className="table-intake-species">{ species && species.name }</Table.Cell>
         <Table.Cell className="table-intake-quantity" textAlign='center'>{ intake.quantity }</Table.Cell>
