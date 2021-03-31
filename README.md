@@ -1,6 +1,6 @@
-# Lana Workflows App
+# EWildlife App
 
-A React/Redux powered app that allows a customized query against the Enlyton API, this works in conjunction with the Lana Workflows Admin App.
+A React/Redux powered app for collecting wildlife intakes and then outputting into the Parks & Wildlife Format
 
 ## Setup
 
@@ -13,7 +13,7 @@ You will need to be authenticated with Firebase to deploy the application, once 
 
 Because this application lives in the same Firebase project as the admin application you will need to apply a target name for this app by running:
 
-`firebase target:apply app enlyton-lana-workflows`
+`firebase target:apply app ewildlife`
 
 ## Development
 
