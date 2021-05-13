@@ -27,18 +27,17 @@ class SignInView extends Component {
 
     // If the component is authenticated and not waiting for a response the go to front page
     if (isAuthenticated) {
-      history.replace({ pathname: '/intake', search: history.location.search });
+      history.replace({ pathname: '/intakes', search: history.location.search });
     }
   }
 
   render() {
     return (
       <div className="view view-sign-in">
-        <h1>Sign In</h1>
-
-        {/* <Segment className="segment-form">
+        <div className="section-form">
+          <h2>Sign In</h2>
           <SignInForm/>
-        </Segment> */}
+        </div>
       </div>
     );
   }

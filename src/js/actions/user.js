@@ -29,7 +29,7 @@ export const loadUser = ( user ) => {
 
       // If the organization is different then load the new org
       if ( userMetaData.organization.id !== state.organization.uid ) {
-        dispatch( loadOrganization( userMetaData.organization.id ) );
+        // dispatch( loadOrganization( userMetaData.organization.id ) );
       }
     } );
   };

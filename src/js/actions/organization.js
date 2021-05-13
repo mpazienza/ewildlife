@@ -29,21 +29,20 @@ export const loadOrganization = ( uid ) => {
           uid: uid,
           name: orgMetaData.name,
           owner: orgMetaData.owner,
-          isOwner: ( state.user.uid === orgMetaData.owner ),
-          taxonomy: orgMetaData.taxonomy.id
+          isOwner: ( state.user.uid === orgMetaData.owner )
         }
       } );
 
       // If the taxonomy is different then load the new taxonomy
       if ( !orgMetaData.taxonomy.uid !== state.taxonomy.uid ) {
-        dispatch( loadTaxonomy( orgMetaData.taxonomy.id ) );
+        // dispatch( loadTaxonomy( orgMetaData.taxonomy.id ) );
       }
 
       // Load the members
-      dispatch( getOrganizationMembers() );
+      // dispatch( getOrganizationMembers() );
 
       // Load the intakes
-      dispatch( loadIntakes() );
+      // dispatch( loadIntakes() );
     } );
   };
 };

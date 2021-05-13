@@ -24,8 +24,8 @@ class SignInForm extends Component {
   handleEmailLogin( e ) {
     e.preventDefault();
 
-    var email = this.emailRef.current.inputRef.current.value;
-    var password = this.passwordRef.current.inputRef.current.value;
+    var email = this.emailRef.current.value;
+    var password = this.passwordRef.current.value;
 
     this.props.attemptLogin(email, password);
   }
@@ -48,19 +48,19 @@ class SignInForm extends Component {
   render() {
     var { error } = this.props;
 
-    return([]
-      // <Form onSubmit={ this.handleEmailLogin }>
-      //   { error && <div className="error-text"><p>Hmm... We didn&apos;t recognize that Email/Password.</p></div>}
-      //     <Form.Field>
-      //       <label>Email</label>
-      //       <Input type='email' ref={ this.emailRef } />
-      //     </Form.Field>
-      //     <Form.Field>
-      //       <label>Password</label>
-      //       <Input type='password' ref={ this.passwordRef } />
-      //     </Form.Field>
-      //   <Button type='submit' fluid primary >Submit</Button>
-      // </Form>
+    return(
+      <form onSubmit={ this.handleEmailLogin }>
+        { error && <div className='error-text'><p>Hmm... We didn&apos;t recognize that Email/Password.</p></div>}
+           <div className='field-group'>
+             <input type='email' className='field-text' ref={ this.emailRef } />
+             <label>Email</label>
+           </div>
+           <div className='field-group'>
+             <input type='password' className='field-text' ref={ this.passwordRef } />
+             <label>Password</label>
+           </div>
+         <button type='submit' className='btn btn-primary'>Submit</button>
+      </form>
     );
   }
 }

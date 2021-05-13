@@ -52,7 +52,6 @@ export const loadTaxonomy = ( uid ) => {
         } );
 
         Promise.all( familyPromises ).then( families => {
-          console.log(families);
           dispatch( {
             type: UPDATE_TAXONOMY,
             value: {

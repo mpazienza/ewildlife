@@ -1,6 +1,6 @@
-import firebase, { db } from '../utils/firebase';
+import firebase from '../utils/firebase';
 import { loadUser } from './user';
-import { ATTEMPTING_LOGIN, AWAITING_RESPONSE, FORGOT_PASSWORD, PASSWORD_SENT, ERROR_LOGIN, UPDATE_USER, LOGOUT_USER, LOAD_ORGANIZATION, LOGIN_USER } from '../constants';
+import { ATTEMPTING_LOGIN, AWAITING_RESPONSE, FORGOT_PASSWORD, PASSWORD_SENT, ERROR_LOGIN, LOGOUT_USER, LOGIN_USER } from '../constants';
 
 export const checkAuth = () => {
   return ( dispatch ) => {
@@ -62,6 +62,7 @@ export const forgotPassword = ( email ) => {
 
 export const loginUser = (user) => {
   return ( dispatch ) => {
+
     // Load the User
     dispatch( loadUser( user ) );
 

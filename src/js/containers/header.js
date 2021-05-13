@@ -25,6 +25,12 @@ class Header extends Component {
               <li><NavLink to="/reports">Reports</NavLink></li>
             </ul> }
           </nav>
+
+          <div className="spacer"></div>
+
+          <div className="user-menu">
+            { !isAuthenticated && <Link to="/sign-in" className="btn btn-primary">Sign-in</Link> }
+          </div>
           {/* <Menu.Menu position='right'>
 
             { isAuthenticated && <Dropdown className="item simple" text="Settings">
