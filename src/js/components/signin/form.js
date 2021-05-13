@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { attemptLoginWithEmail } from '../../actions/auth';
 
 // Components
-import { Form, Input, Button } from 'semantic-ui-react';
 
 class SignInForm extends Component {
   constructor(props) {
@@ -49,19 +48,19 @@ class SignInForm extends Component {
   render() {
     var { error } = this.props;
 
-    return(
-      <Form onSubmit={ this.handleEmailLogin }>
-        { error && <div className="error-text"><p>Hmm... We didn&apos;t recognize that Email/Password.</p></div>}
-          <Form.Field>
-            <label>Email</label>
-            <Input type='email' ref={ this.emailRef } />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <Input type='password' ref={ this.passwordRef } />
-          </Form.Field>
-        <Button type='submit' fluid primary >Submit</Button>
-      </Form>
+    return([]
+      // <Form onSubmit={ this.handleEmailLogin }>
+      //   { error && <div className="error-text"><p>Hmm... We didn&apos;t recognize that Email/Password.</p></div>}
+      //     <Form.Field>
+      //       <label>Email</label>
+      //       <Input type='email' ref={ this.emailRef } />
+      //     </Form.Field>
+      //     <Form.Field>
+      //       <label>Password</label>
+      //       <Input type='password' ref={ this.passwordRef } />
+      //     </Form.Field>
+      //   <Button type='submit' fluid primary >Submit</Button>
+      // </Form>
     );
   }
 }

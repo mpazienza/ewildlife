@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { updateUserEmail, updateUserMetaData } from '../../actions/user';
 
 // Components
-import { Form, Header, Input, Button, Segment, Divider } from 'semantic-ui-react';
 
 // Create the view
 class SettingsView extends Component {
@@ -43,9 +42,9 @@ class SettingsView extends Component {
 
     return (
       <div className="view view-settings">
-        <Header as="h1">Settings</Header>
+        <h1>Settings</h1>
 
-        <Segment>
+        {/* <Segment>
           <Header as="h2">My Information</Header>
 
           <Form>
@@ -69,7 +68,7 @@ class SettingsView extends Component {
           <Divider/>
 
           <p>Is <strong>{ memberType }</strong> of { organization.name } organization</p>
-        </Segment>
+        </Segment> */}
       </div>
     );
   }

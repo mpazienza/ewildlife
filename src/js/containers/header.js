@@ -5,7 +5,6 @@ import { NavLink, Link, withRouter } from 'react-router-dom';
 import { AUTHENTICATED } from '../constants';
 
 // Components
-import { Container, Menu, Dropdown } from 'semantic-ui-react';
 
 class Header extends Component {
   constructor(props) {
@@ -16,23 +15,27 @@ class Header extends Component {
     const { isAuthenticated } = this.props;
     return (
       <header id="head" role="header">
-        <Menu className="fixed inverted">
-          <Container>
-            <Menu.Item header as={ Link } to="/">eWildlife</Menu.Item>
-            { isAuthenticated && <Menu.Item name="Intake" as={ NavLink } to="/intake" /> }
-            { isAuthenticated && <Menu.Item name="Reports" as={ NavLink } to="/reports" /> }
-            <Menu.Menu position='right'>
+        <div className="container">
+          <Link to="/" className="logo">eWildlife</Link>
 
-              { isAuthenticated && <Dropdown className="item simple" text="Settings">
-                <Dropdown.Menu>
-                  <Dropdown.Item as={ NavLink } to="/settings" text="Profile"></Dropdown.Item>
-                  <Dropdown.Item as={ NavLink } to="/organization" text="Organization"></Dropdown.Item>
-                  <Dropdown.Item as={ Link } to="/log-out" text="Log out"></Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown> }
-            </Menu.Menu>
-          </Container>
-        </Menu>
+          <nav role="navigation">
+            { isAuthenticated && <ul>
+              <li><NavLink to="/intakes">Intakes</NavLink></li>
+              <li><NavLink to="/contacts">Contacts</NavLink></li>
+              <li><NavLink to="/reports">Reports</NavLink></li>
+            </ul> }
+          </nav>
+          {/* <Menu.Menu position='right'>
+
+            { isAuthenticated && <Dropdown className="item simple" text="Settings">
+              <Dropdown.Menu>
+                <Dropdown.Item as={ NavLink } to="/settings" text="Profile"></Dropdown.Item>
+                <Dropdown.Item as={ NavLink } to="/organization" text="Organization"></Dropdown.Item>
+                <Dropdown.Item as={ Link } to="/log-out" text="Log out"></Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown> }
+          </Menu.Menu> */}
+        </div>
       </header>
     );
   }

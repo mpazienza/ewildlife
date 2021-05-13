@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Components
-import { Header } from 'semantic-ui-react';
 
 // Create the view
 class ReportView extends Component {
@@ -14,7 +13,7 @@ class ReportView extends Component {
   render() {
     return (
       <div className="view view-home">
-        <Header as="h1">Reports</Header>
+        <h1>Reports</h1>
       </div>
     );
   }

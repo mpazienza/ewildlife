@@ -4,6 +4,7 @@
 
 html {
   font-size: 10px;
+  font-family: 'Lato', sans-serif;
 }
 
 html,
@@ -11,10 +12,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-#main {
-  margin-top: 40px;
+.container {
+  margin: 0 6vw;
 }
 
-.view {
-  padding: 2rem 0;
+a {
+  text-decoration: none;
+  transition: all 0.3s;
 }

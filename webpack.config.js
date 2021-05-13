@@ -16,7 +16,7 @@ module.exports = () => {
     context: path.join(__dirname, 'src'),
     entry: {
       main: ['@babel/polyfill', './js/index.js','./sass/main.scss'],
-      vendor: ['semantic-ui-css/semantic.min.css']
+      // vendor: []
     },
     externals: {
       "createjs": "createjs"

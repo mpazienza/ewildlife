@@ -18,7 +18,7 @@ import HomeView from './views/home';
 import SignInView from './views/sign-in';
 import SignOutView from './views/sign-out';
 import SignUpView from './views/sign-up';
-import IntakeView from './views/intake';
+import IntakesView from './views/intakes';
 import ReportsView from './views/reports';
 
 import SettingsView from './views/settings';
@@ -49,7 +49,7 @@ render(
               <Route exact path='/sign-in' component={ SignInView } />
               <Route exact path='/sign-out' component={ SignOutView } />
               <Route exact path='/sign-up' component={ SignUpView } />
-              <Route exact path='/intake' component={ RequireAuth( IntakeView ) } />
+              <Route exact path='/intakes' component={ RequireAuth( IntakesView ) } />
               <Route exact path='/reports' component={ RequireAuth( ReportsView ) } />
               <Route exact path='/settings' component={ RequireAuth( SettingsView ) } />
               <Route exact path='/organization' component={ RequireAuth( OrganizationView ) } />

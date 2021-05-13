@@ -5,7 +5,6 @@ import { logoutUser } from '../../actions/auth';
 import { AWAITING_RESPONSE, AUTHENTICATED, ANONYMOUS } from '../../constants';
 
 // Components
-import { Header } from 'semantic-ui-react';
 
 // Create the view
 class SignOutView extends Component {
@@ -39,7 +38,7 @@ class SignOutView extends Component {
   render() {
     return (
       <div className="view view-sign-out">
-        <Header as="h1">Signing out...</Header>
+        <h1>Signing out...</h1>
       </div>
     );
   }

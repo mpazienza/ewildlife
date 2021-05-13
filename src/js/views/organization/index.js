@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { updateOrganizationMetaData } from '../../actions/organization';
 
 // Components
-import { Header, Segment, Form, Input, Button } from 'semantic-ui-react';
 import TaxonomyList from '../../components/taxonomy/list';
 import MemberList from '../../components/members/list';
 
@@ -48,9 +47,9 @@ class OrganizationView extends Component {
 
     return (
       <div className="view view-settings">
-        <Header as="h1">Organization</Header>
+        <h1>Organization</h1>
 
-        <Segment>
+        {/* <div>
           <Form>
             <Form.Field>
               <label>Name</label>
@@ -74,7 +73,7 @@ class OrganizationView extends Component {
           <MemberList members={ organization.members }/>
 
           <Button primary>Add Member</Button>
-        </Segment>
+        </Segment> */}
       </div>
     );
   }

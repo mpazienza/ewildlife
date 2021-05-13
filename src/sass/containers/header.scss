@@ -1,0 +1,60 @@
+#head {
+  height: 5rem;
+  background: $color1;
+  display: block;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3  );
+
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .logo {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 900;
+  }
+
+  nav {
+    height: inherit;
+    margin: 0 3rem;
+    flex-grow: 1;
+    flex-shrink: 1;
+    font-size: 1.4rem;
+
+    ul {
+      height: inherit;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    li {
+      height: inherit;
+      margin-right: 1px;
+    }
+
+    a {
+      height: inherit;
+      padding: 0 1.5rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+    }
+
+    a:hover,
+    a.active {
+      background: $color2;
+    }
+
+    a.active {
+      font-weight: 900;
+    }
+  }
+}

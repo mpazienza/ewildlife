@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { AUTHENTICATED } from '../../constants';
 
 // Components
-import { Button, Header } from 'semantic-ui-react';
 import IntakeList from '../../components/intake/list';
 
 // Create the view
@@ -18,9 +17,9 @@ class IntakeView extends Component {
 
     return (
       <div className="view view-intake">
-        <Header as="h1">Intake</Header>
+        <h1>Intake</h1>
 
-        <Button primary>New Intake</Button>
+        <button>New Intake</button>
 
         <IntakeList intakes={ intakes } />
       </div>

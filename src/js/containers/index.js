@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Components
-import { Container } from 'semantic-ui-react';
 import Header from './header';
 
 class AppContainer extends Component {
@@ -17,9 +16,9 @@ class AppContainer extends Component {
     return (
       <div id="app">
         <Header/>
-        <Container as="main" id="main" role="content">
+        <main id="main" role="content" className="ui container">
           { children }
-        </Container>
+        </main>
       </div>
     );
   }
